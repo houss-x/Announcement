@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>New announcement</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" fill="clear" color="danger">
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<!-- announcement-form -->
+<ion-content class="ion-padding">
+  <form #announcementForm="ngForm">
+    <ion-item>
+      <ion-label position="stacked">Title</ion-label>
+      <ion-input ngModel name="title" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Subtitle</ion-label>
+      <ion-input ngModel name="subtitle" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Content</ion-label>
+      <ion-textarea ngModel name="content" required></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Category</ion-label>
+      <ion-select ngModel name="category"  placeholder="Select Category" required>
+        <ion-select-option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!announcementForm.valid" (click)="onSubmit(announcementForm.value)">
+      <ion-icon name="add-circle"></ion-icon>
+      Create Announcement
+    </ion-button>
+  </form>
+</ion-content>

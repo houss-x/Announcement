@@ -1,5 +1,13 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Announcement } from '../models/anouncement';
+import { AnouncementSService } from '../anouncement-s.service';
+import { AlertController } from '@ionic/angular';
+import { AnouncementDetailsComponent } from '../anouncement-details/anouncement-details.component';
+import { ModalController } from '@ionic/angular';
+import { AnnouncementStatus } from '../enum/status';
+import { AnouncementAddComponent } from '../anouncement-add/anouncement-add.component';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -7,31 +15,59 @@ import { Announcement } from '../models/anouncement';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  constructor(   private router: Router, private changeDetectorRef: ChangeDetectorRef // Auto Detect
+,  private modal:ModalController,private announcementService: AnouncementSService,private alertCtrl: AlertController) {}
+  UserLoged ="Houssam"
+  selectedTab: string = 'Announcement';
   ngOnInit() {
-     this.filterAnnouncementsByUser('houssam');
+    this.selectedTab = 'Announcement';
+    this.cardItems=  this.announcementService.getAnnouncements("Houssam");
   }
-  filteredAnnouncements: Announcement[] = [];
-  //must add the Id
-   cardItems: Announcement[] = [
-    new Announcement('houssam', 'Card 1', 'Subtitle 1', 'Content for card 1'),
-    new Announcement('houssam', 'Card 2', 'Subtitle 2', 'Content for card 2'),
-    new Announcement('otherUser', 'Card 3', 'Subtitle 3', 'Content for card 3'),
-    // Add more announcements with 'houssam' or other user as needed
-  ];
-  deleteAnnouncement(item: Announcement) {
-    const index = this.filteredAnnouncements.findIndex(
-      (announcement) => announcement.user === item.user && announcement.title === item.title
-    );
-  
-    if (index !== -1) {
-      this.filteredAnnouncements.splice(index, 1);
-    }
-  }
-   
-  
-  filterAnnouncementsByUser(username: string) {
-    this.filteredAnnouncements = this.cardItems.filter((announcement) => announcement.user === username);
-  }
-  constructor() {}
+  cardItems=  this.announcementService.getAnnouncements("Houssam");
+  async deleteAnnouncement(item: Announcement) {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmation',
+      message: 'Are you sure you want to delete this announcement?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            const index = this.cardItems.findIndex(
+              (announcement) => announcement.user === item.user && announcement.title === item.title
+            );
+          
+            if (index !== -1) {
+              this.cardItems.splice(index, 1);
+            }
+          },
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+        },
+      ],
+    });
 
+    await alert.present();
+  }
+  async viewAnnouncement(item: Announcement) {
+    const modal = await this.modal.create({
+      component: AnouncementDetailsComponent,
+      componentProps: {
+        announcement: item,
+      },
+    });
+    await modal.present();
+  }
+  async addAnnouncement() {
+    const modal = await this.modal.create({
+      component: AnouncementAddComponent,
+    });
+    await modal.present();
+    await modal.onDidDismiss();
+    this.changeDetectorRef.detectChanges();
+    this.cardItems=  this.announcementService.getAnnouncements("Houssam");
+  }
 }
+
+ 
