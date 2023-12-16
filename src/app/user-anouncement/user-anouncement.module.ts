@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 
-
+//link the module with component
 @NgModule({
   declarations: [UserAnouncementComponent],
   imports: [

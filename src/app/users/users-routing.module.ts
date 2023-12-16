@@ -9,6 +9,7 @@ const routes: Routes = [
         component: UsersComponent,     
       }
       ,
+      // routing for user anouncement component with given id
       {
         path: 'user/:id',
         component: UserAnouncementComponent,

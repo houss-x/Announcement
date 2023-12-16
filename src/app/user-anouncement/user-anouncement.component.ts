@@ -15,14 +15,15 @@ export class UserAnouncementComponent  implements OnInit {
   announcements:any;
   userId:any;
   ngOnInit() {
+    // getting the Passed Id in URl for getting anouncements of the choosen user 
     this.route.params.subscribe(params => {
       this.userId = params['id'];
-      // Now you can use this.userId in your component
     });
+    // getting anouncement by user Id
     this.announcements=this.service.getAnnouncements().filter((anouncement)=>anouncement.user.id.toString()==this.userId);
   }
   getStatusIcon(status: AnnouncementStatus): string {
-    // Map AnnouncementStatus to Ionicons
+    // Map AnnouncementStatus to Ionicons, note that AnnouncementCategory is Enum
     switch (status) {
       case AnnouncementStatus.Draft:
         return 'document-outline';
@@ -34,6 +35,20 @@ export class UserAnouncementComponent  implements OnInit {
         return '';
     }
   }
+  getStatusLabel(status: AnnouncementStatus): string {
+    // Map AnnouncementStatus to Ionicons, note that AnnouncementCategory is Enum
+    switch (status) {
+      case AnnouncementStatus.Draft:
+        return 'Draft';
+      case AnnouncementStatus.Published:
+        return 'Published';
+      case AnnouncementStatus.Archived:
+        return 'Archived';
+      default:
+        return '';
+    }
+  }
+  //getting the category item note that AnnouncementCategory is Enum
   getCategoryLabel(category: AnnouncementCategory): string {
     switch (category) {
       case AnnouncementCategory.General:

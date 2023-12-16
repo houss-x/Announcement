@@ -15,6 +15,7 @@ export class AnouncementSService {
   ];
   private Anouncement: Announcement[] = [
     new Announcement(
+      1,
       this.Users[0],
       'Exciting Developments in Technology!','Technology',
       'Stay tuned for the latest advancements in technology. We have some exciting news to share with you!',
@@ -23,6 +24,7 @@ export class AnouncementSService {
       AnnouncementStatus.Published
     ),
     new Announcement(
+      2,
       this.Users[0],
       'Upcoming Real Estate Opportunities','market',
       'Explore new opportunities in the real estate market. Join us for an exclusive preview of upcoming projects.',
@@ -31,6 +33,7 @@ export class AnouncementSService {
       AnnouncementStatus.Draft
     ),
     new Announcement(
+      3,
       this.Users[0],
       'Exclusive Automotive Deals Await You','luxury',
       'Discover exclusive deals on luxury automobiles. Don\'t miss out on these limited-time offers!',
@@ -38,9 +41,9 @@ export class AnouncementSService {
       new Date(),
       AnnouncementStatus.Archived
     ),
-    new Announcement(this.Users[1], 'Introduction to React Hooks', 'React.js Frontend Development', 'Discover the power of React Hooks and how they can simplify your React component logic.',2,new Date(2023, 1, 12),AnnouncementStatus.Draft),
-    new Announcement(this.Users[1], 'Car Sale', 'Salling a car', 'Marcedes AMG',2,new Date(2023, 1, 12),AnnouncementStatus.Published),
-    new Announcement(this.Users[2], 'Introduction to Django', 'Django Frontend Development', 'Discover the power of Python and how they can simplify your django app.',4,new Date(2023, 4, 12),AnnouncementStatus.Archived),
+    new Announcement(4,this.Users[1], 'Introduction to React Hooks', 'React.js Frontend Development', 'Discover the power of React Hooks and how they can simplify your React component logic.',2,new Date(2023, 1, 12),AnnouncementStatus.Draft),
+    new Announcement(5,this.Users[1], 'Car Sale', 'Salling a car', 'Marcedes AMG',2,new Date(2023, 1, 12),AnnouncementStatus.Published),
+    new Announcement(6,this.Users[2], 'Introduction to Django', 'Django Frontend Development', 'Discover the power of Python and how they can simplify your django app.',4,new Date(2023, 4, 12),AnnouncementStatus.Archived),
   ];
 
   getAnnouncements(userName?: string): Announcement[] {
@@ -57,8 +60,7 @@ export class AnouncementSService {
   }
   
   addAnnouncement(user: User, title: string, subtitle: string, content: string, category: number): void {
-
-    const newAnnouncement = new Announcement(user, title, subtitle, content, category);
+    const newAnnouncement = new Announcement(this.Anouncement.length++,user, title, subtitle, content, category);
     this.Anouncement.push(newAnnouncement);
   }
   constructor() { }

@@ -10,13 +10,16 @@ import { AnnouncementCategory } from '../enum/category';
   styleUrls: ['./anouncement-details.component.scss'],
 })
 export class AnouncementDetailsComponent  implements OnInit {
+  // the code allow us to get the anouncement that passed from anouncement list to details with Input()
   @Input()
   announcement!: Announcement;
 
   constructor(private modal:ModalController) { }
+  // function to close the anouncement detail popup
   closeModal() {
     this.modal.dismiss();
   }
+  // getting the category definition depend on given category number
   getAnnouncementCategoryLabel(category: AnnouncementCategory): string {
     switch (category) {
       case AnnouncementCategory.General:
@@ -35,7 +38,7 @@ export class AnouncementDetailsComponent  implements OnInit {
         return '';
     }
   }
-
+  // getting the status definition depend on given status number
   getAnnouncementStatusLabel(status: AnnouncementStatus): string {
     switch (status) {
       case AnnouncementStatus.Draft:

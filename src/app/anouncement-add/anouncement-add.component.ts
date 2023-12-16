@@ -11,6 +11,7 @@ import { User } from '../models/User';
 })
 export class AnouncementAddComponent  implements OnInit {
   UserLoged="Houssam"
+  // create a record (Dictionary) to link the item number value with string in to
    categoryMapping: Record<string, number> = {
     General: AnnouncementCategory.General,
     Technology: AnnouncementCategory.Technology,
@@ -27,6 +28,7 @@ export class AnouncementAddComponent  implements OnInit {
   onSubmit(formData: any) {
     // Assuming you have a User object for the current user
     const currentUser = new User(1, 'Houssam'); // Replace with your actual user details
+    //getting the value of the choosing enum number value 
     const categoryNumber = this.categoryMapping[formData.category];
     this.anounService.addAnnouncement(
       currentUser,
@@ -35,7 +37,7 @@ export class AnouncementAddComponent  implements OnInit {
       formData.content,
       categoryNumber
     );
-
+// closing the model after submit
     this.closeModal();
     }
 

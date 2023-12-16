@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+// adding the two route of user and Home
 const routes: Routes = [
   {
     path: 'home',
@@ -16,7 +16,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
 ];
-
+// import the Router module in add our route for the app then export it to be accessible to the app
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

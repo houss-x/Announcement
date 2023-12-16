@@ -3,6 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button> </ion-menu-button>
     </ion-buttons>
+    <!-- with ngModel we can applyin the two way binding-->
     <ion-segment [(ngModel)]="selectedTab" color="secondary">
       <ion-segment-button value="Announcement">
         <ion-icon name="apps-sharp"></ion-icon>
@@ -36,18 +37,18 @@
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
-
+<!-- foreach the anouncement list-->
   <div id="container" class="card-container">
     <div class="card" *ngFor="let item of cardItems">
       <ion-card>
-        
+        <!-- this card header show the status color depend on status using two functions , check TS file to view functions-->
         <ion-card-header>
           <ion-buttons class="status-badge">
             <ion-badge [color]="getStatusBadgeColor(item.status)">{{ getStatusBadgeLabel(item.status) }}</ion-badge>
           </ion-buttons>
           <ion-card-title>{{item.title}}</ion-card-title>
           <ion-card-subtitle>{{item.subtitle}}</ion-card-subtitle>
-          
+          <!-- button of view and delete anouncement -->
         </ion-card-header>     
           <ion-button fill="clear" (click)="deleteAnnouncement(item)">
             <ion-icon name="trash-sharp"></ion-icon>
@@ -61,7 +62,7 @@
   </div>
 </ion-content>
 
-
+<!-- methode that open the popup-->
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button (click)="addAnnouncement()">
     <ion-icon name="add-circle"></ion-icon>
