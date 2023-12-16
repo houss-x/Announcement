@@ -50,6 +50,12 @@ export class HomePage {
 
     await alert.present();
   }
+  getStatusBadgeColor(status: AnnouncementStatus): string {
+    return status === AnnouncementStatus.Published ? 'success' :status === AnnouncementStatus.Draft? 'danger':'warning';
+  }
+  getStatusBadgeLabel(status: AnnouncementStatus): string {
+    return status === AnnouncementStatus.Published ? 'Published' :status === AnnouncementStatus.Draft? 'Draft':'Archived';
+  }
   async viewAnnouncement(item: Announcement) {
     const modal = await this.modal.create({
       component: AnouncementDetailsComponent,

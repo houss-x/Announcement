@@ -13,5 +13,7 @@ export class UsersComponent  implements OnInit {
 
   ngOnInit() {}
   Users :User[] =this.service.getUsers().filter((user) =>user.userName != "Houssam");
-
+  getUserAnouncementCount(id:any){
+    return this.service.getAnnouncements().filter((anoun)=>anoun.user.id==id).length;
+  }
 }

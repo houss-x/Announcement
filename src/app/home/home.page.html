@@ -42,7 +42,9 @@
       <ion-card>
         
         <ion-card-header>
-     
+          <ion-buttons class="status-badge">
+            <ion-badge [color]="getStatusBadgeColor(item.status)">{{ getStatusBadgeLabel(item.status) }}</ion-badge>
+          </ion-buttons>
           <ion-card-title>{{item.title}}</ion-card-title>
           <ion-card-subtitle>{{item.subtitle}}</ion-card-subtitle>
           
@@ -53,6 +55,7 @@
           <ion-button fill="clear" (click)="viewAnnouncement(item)">
             <ion-icon name="eye-sharp"></ion-icon>
           </ion-button>
+         
       </ion-card>
     </div>
   </div>

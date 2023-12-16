@@ -24,15 +24,16 @@
    Users List
     <ion-icon name="list-outline" slot="start"></ion-icon>
   </ion-item>
-  <ion-list *ngFor="let item of Users" [routerLink]="['/anouncement', item.id]"> 
+  <ion-list *ngFor="let item of Users"> 
     <ion-item>
       <ion-avatar aria-hidden="true" slot="start">
         <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
       </ion-avatar>
       <ion-label>{{item.userName}}</ion-label>
-      <ion-button expand="full" color="primary" routeLink="user/anouncement">
-        <ion-icon name="folder" slot="start"></ion-icon>
-        Show Anouncements
+      <ion-button expand="full" color="primary"   [routerLink]="['/user', item.id]" [disabled]="getUserAnouncementCount(item.id) === 0">
+        <ion-icon name="eye-sharp" slot="end"></ion-icon>
+        <ion-badge slot="start">{{ getUserAnouncementCount(item.id) }}</ion-badge>
+        <ion-label>Anouncements</ion-label>
       </ion-button>
     </ion-item>
   </ion-list>

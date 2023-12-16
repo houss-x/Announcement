@@ -6,13 +6,13 @@ import { UserAnouncementComponent } from '../user-anouncement/user-anouncement.c
 const routes: Routes = [
     {
         path: '',
-        component: UsersComponent,
+        component: UsersComponent,     
       }
       ,
-  {
-    path: 'anouncement:id',
-    component: UserAnouncementComponent,
-  }
+      {
+        path: 'user/:id',
+        component: UserAnouncementComponent,
+      }
   ];
   
   @NgModule({
